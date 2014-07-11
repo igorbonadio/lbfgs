@@ -24,7 +24,7 @@ func main() {
 	g := lbfgs.NewVector(2)
 
 	// x初始化为(1, 0.1)
-	x.SetValues([]float32{1, 0.1})
+	x.SetValues([]float64{1, 0.1})
 
 	k := 0
 	for {
@@ -32,7 +32,7 @@ func main() {
 		fmt.Println("x =", x)
 
 		// 更新偏导数向量
-		g.SetValues([]float32{2*x.Get(0), 2*x.Get(1)})
+		g.SetValues([]float64{2*x.Get(0), 2*x.Get(1)})
 		fmt.Println("g =", g)
 
 		// 计算x更新的步长

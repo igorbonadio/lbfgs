@@ -35,7 +35,7 @@ func TestVectorOpposite(t *testing.T) {
 
 func TestVectorNorm(t *testing.T) {
 	vec := NewVector(2)
-	vec.SetValues([]float32{3, 4})
+	vec.SetValues([]float64{3, 4})
 	Expect(t, "5", vec.Norm())
 }
 
@@ -48,9 +48,9 @@ func TestMod(t *testing.T) {
 
 func TestVecDotProduct(t *testing.T) {
 	vec1 := NewVector(3)
-	vec1.SetValues([]float32{1, 2, 3})
+	vec1.SetValues([]float64{1, 2, 3})
 	vec2 := NewVector(3)
-	vec2.SetValues([]float32{3, 4, 5})
+	vec2.SetValues([]float64{3, 4, 5})
 
 	// 点乘积为 1*3+2*4+3*5 = 26
 	Expect(t, "26", VecDotProduct(vec1, vec2))
@@ -58,9 +58,9 @@ func TestVecDotProduct(t *testing.T) {
 
 func TestWeightedSum(t *testing.T) {
 	vec1 := NewVector(3)
-	vec1.SetValues([]float32{1, 2, 3})
+	vec1.SetValues([]float64{1, 2, 3})
 	vec2 := NewVector(3)
-	vec2.SetValues([]float32{3, 4, 5})
+	vec2.SetValues([]float64{3, 4, 5})
 
 	vec1.WeightedSum(vec1, vec2, 3, 4)
 	Expect(t, "15", vec1.Get(0))
@@ -70,7 +70,7 @@ func TestWeightedSum(t *testing.T) {
 
 func TestDeepCopy(t *testing.T) {
 	vec1 := NewVector(3)
-	vec1.SetValues([]float32{1, 2, 3})
+	vec1.SetValues([]float64{1, 2, 3})
 
 	// shallow copy
 	vec2 := vec1
@@ -88,9 +88,9 @@ func TestDeepCopy(t *testing.T) {
 
 func TestIncrement(t *testing.T) {
 	vec1 := NewVector(3)
-	vec1.SetValues([]float32{1, 2, 3})
+	vec1.SetValues([]float64{1, 2, 3})
 	vec2 := NewVector(3)
-	vec2.SetValues([]float32{1, 7, 2})
+	vec2.SetValues([]float64{1, 7, 2})
 
 	vec1.Increment(vec2, 2)
 	Expect(t, "3", vec1.Get(0))

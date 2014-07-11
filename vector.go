@@ -10,7 +10,7 @@ type vector struct {
 	length int
 
 	// 向量中元素的值
-	values []float32
+	values []float64
 }
 
 // 构造长度（维度）为length的向量
@@ -18,7 +18,7 @@ type vector struct {
 func NewVector(length int) *vector {
 	v := new(vector)
 	v.length = length
-	v.values = make([]float32, length)
+	v.values = make([]float64, length)
 	v.Clear()
 	return v
 }
@@ -30,7 +30,7 @@ func (v *vector) Clear() {
 }
 
 // 设置向量中所有元素的值
-func (v *vector) SetValues(values []float32) {
+func (v *vector) SetValues(values []float64) {
 	if v.length != len(values) {
 		log.Fatal("SetValues参数切片长度和向量长度不一致")
 	}
@@ -40,12 +40,12 @@ func (v *vector) SetValues(values []float32) {
 }
 
 // 设置向量中元素的值
-func (v *vector) Set(index int, value float32) {
+func (v *vector) Set(index int, value float64) {
 	v.values[Mod(index, v.length)] = value
 }
 
 // 得到向量中元素的值
-func (v *vector) Get(index int) float32 {
+func (v *vector) Get(index int) float64 {
 	return v.values[Mod(index, v.length)]
 }
 
@@ -69,7 +69,7 @@ func (v *vector) DeepCopy(that *vector) {
 }
 
 // v = v + alpha * that
-func (v *vector) Increment(that *vector, alpha float32) {
+func (v *vector) Increment(that *vector, alpha float64) {
 	if v.length != that.length {
 		log.Fatal("Increment时向量长度不匹配")
 	}
@@ -79,16 +79,16 @@ func (v *vector) Increment(that *vector, alpha float32) {
 }
 
 // 1-模
-func (v *vector) Norm() float32 {
-	var result float32
+func (v *vector) Norm() float64 {
+	var result float64
 	for i := 0; i < v.length; i++ {
 		result += v.values[i] * v.values[i]
 	}
-	return float32(math.Sqrt(float64(result)))
+	return float64(math.Sqrt(float64(result)))
 }
 
 // 计算两个向量的线性求和 v = a * vector1 + b * vector2
-func (v *vector) WeightedSum(vector1, vector2 *vector, a, b float32) {
+func (v *vector) WeightedSum(vector1, vector2 *vector, a, b float64) {
 	if v.length != vector1.length || vector1.length != vector2.length {
 		log.Fatal("v, vector1和vector2的长度不一致")
 	}
@@ -113,12 +113,12 @@ func Mod(a, b int) int {
 }
 
 // 计算点乘积 vector1^T * vector2
-func VecDotProduct(vector1, vector2 *vector) float32 {
+func VecDotProduct(vector1, vector2 *vector) float64 {
 	if vector1.length != vector2.length {
 		log.Fatal("vector1和vector2的长度不一致")
 	}
 
-	var result float32
+	var result float64
 	result = 0
 	for iterVec1 := 0; iterVec1 < vector1.length; iterVec1++ {
 		result += vector1.values[iterVec1] * vector2.values[iterVec1]
